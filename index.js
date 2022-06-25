@@ -42,7 +42,20 @@ offset: {
 imageSrc: './image/samuraiMack/Idle.png',
 framesMax: 8,
 scale: 2.5,
-offset: {x: 215, y: 157}
+offset: {
+    x: 215, 
+    y: 157
+}, 
+sprites: {
+idle: {
+    imageSrc: './image/samuraiMack/Idle.png',
+    framesMax: 8
+},
+run: {
+    imageSrc: './image/samuraiMack/Run.png',
+    framesMax: 8
+}
+}
 });
 
 const enemy = new Fighter({
@@ -93,16 +106,22 @@ function animate()
     //enemy.update();
 
     player.velocity.x = 0;
+    enemy.velocity.x = 0;
+
+    //player movement
+    player.image = player.sprites.idle.image;
     if(keys.a.pressed && player.lastKey == 'a')
     {
         player.velocity.x = -5;
+        player.image = player.sprites.run.image;
     }
     else if(keys.d.pressed && player.lastKey == 'd')
     {
         player.velocity.x = 5;
+        player.image = player.sprites.run.image;
     }
 
-    enemy.velocity.x = 0;
+    
     if(keys.ArrowLeft.pressed && enemy.lastKey == 'ArrowLeft')
     {
         enemy.velocity.x = -5;
