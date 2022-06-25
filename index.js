@@ -126,6 +126,24 @@ function rectangularCollision({rectangle1, rectangle2})
         && rectangle1.attackBox.position.y + rectangle1.attackBox.height >= rectangle2.position.y && rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height )
 }
 
+let timer = 10;
+function decreaseTimer()
+{
+    if(timer>0)
+    {
+        setTimeout(decreaseTimer, 1000);
+        timer--;
+        document.querySelector('#timer').innerHTML = timer;
+    }
+
+    if (player.health == enemy.health)
+    {
+        console.log('tie');
+    }
+
+}
+
+decreaseTimer();
 
 function animate()
 {
