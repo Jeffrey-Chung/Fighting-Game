@@ -93,6 +93,7 @@ class Fighter extends Sprite
         if(this.position.y + this.height + this.velocity.y >= canvas.height - 96)
         {
             this.velocity.y = 0;
+            this.position.y = 330;
         }
         else 
         {
@@ -134,6 +135,14 @@ class Fighter extends Sprite
                 this.framesCurrent = 0;
                 }
                 break;
+                case 'fall':
+                    if(this.image != this.sprites.fall.image)
+                    {
+                    this.image = this.sprites.fall.image;
+                    this.framesMax = this.sprites.fall.framesMax;
+                    this.framesCurrent = 0;
+                    }
+                    break;
        }
 
    }

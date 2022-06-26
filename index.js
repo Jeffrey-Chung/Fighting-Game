@@ -58,7 +58,11 @@ run: {
 jump: {
     imageSrc: './image/samuraiMack/Jump.png',
     framesMax: 2
-}
+}, 
+fall: {
+    imageSrc: './image/samuraiMack/Fall.png',
+    framesMax: 2
+} 
 }
 });
 
@@ -142,6 +146,10 @@ function animate()
     if(player.velocity.y < 0)
     {
         player.switchSprite('jump');
+    }
+    else if (player.velocity.y > 0)
+    {
+        player.switchSprite('fall');
     }
 
     //detect collision
