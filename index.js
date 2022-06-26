@@ -62,6 +62,10 @@ jump: {
 fall: {
     imageSrc: './image/samuraiMack/Fall.png',
     framesMax: 2
+}, 
+attack1: {
+    imageSrc: './image/samuraiMack/Attack1.png',
+    framesMax: 6
 } 
 }
 });
