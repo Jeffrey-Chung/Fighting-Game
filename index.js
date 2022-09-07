@@ -391,7 +391,7 @@ function animate() {
         enemyTwo.switchSprite('fall');
     }
 
-    //detect where enemy gets hit
+    //detect damage when big player hits big enemy
     if (rectangularCollision({
             rectangle1: player,
             rectangle2: enemy
@@ -406,7 +406,22 @@ function animate() {
         })
     }
 
-    //detect where enemy gets hit
+    //detect damage when big player hits small enemy
+    if (rectangularCollision({
+        rectangle1: player,
+        rectangle2: enemyTwo
+    }) &&
+    player.isAttacking && player.framesCurrent == 4) {
+    enemyTwo.takeHit();
+    player.isAttacking = false;
+   
+    //document.querySelector('#enemyHealth').style.width = enemy.health + '%'
+    gsap.to('#enemyTwoHealth', {
+        width: enemyTwo.health / 1.5 + '%'
+    })
+}
+
+    //detect where small player hits small enemy
     if (rectangularCollision({
         rectangle1: playerTwo,
         rectangle2: enemyTwo
@@ -420,6 +435,20 @@ function animate() {
     })
 }
 
+//detect where small player hits big enemy
+if (rectangularCollision({
+    rectangle1: playerTwo,
+    rectangle2: enemy
+}) &&
+playerTwo.isAttacking && playerTwo.framesCurrent == 4) {
+enemy.takeHit();
+playerTwo.isAttacking = false;
+//document.querySelector('#enemyTwoHealth').style.width = enemyTwo.health + '%'
+gsap.to('#enemyHealth', {
+    width: enemy.health + 10 + '%'
+})
+}
+
     //if player misses
     if (player.isAttacking && player.framesCurrent == 4) {
         player.isAttacking = false;
@@ -428,7 +457,7 @@ function animate() {
         playerTwo.isAttacking = false;
     }
 
-    //detect where player gets hit
+    //detect where big enemy hits big player
     if (rectangularCollision({
             rectangle1: enemy,
             rectangle2: player
@@ -442,6 +471,20 @@ function animate() {
         })
     }
 
+    //detect where big enemy hits small player
+    if (rectangularCollision({
+        rectangle1: enemy,
+        rectangle2: playerTwo
+    }) &&
+    enemy.isAttacking && enemy.framesCurrent == 2) {
+    playerTwo.takeHit();
+    enemy.isAttacking = false;
+    //document.querySelector('#playerHealth').style.width = player.health + '%'
+    gsap.to('#playerTwoHealth', {
+        width: playerTwo.health / 1.5 + '%'
+    })
+}
+    //detect where small enemy hits small player
     if (rectangularCollision({
         rectangle1: enemyTwo,
         rectangle2: playerTwo
@@ -451,8 +494,22 @@ function animate() {
     enemyTwo.isAttacking = false;
     //document.querySelector('#playerHealth').style.width = player.health + '%'
     gsap.to('#playerTwoHealth', {
-        width: playerTwo.health + 10 + '%'
+        width: playerTwo.health + '%'
     })
+}
+
+//detect where small enemy hits big player
+if (rectangularCollision({
+    rectangle1: enemyTwo,
+    rectangle2: player
+}) &&
+enemyTwo.isAttacking && enemyTwo.framesCurrent == 2) {
+player.takeHit();
+enemyTwo.isAttacking = false;
+//document.querySelector('#playerHealth').style.width = player.health + '%'
+gsap.to('#playerHealth', {
+    width: player.health + 10 + '%'
+})
 }
 
     //if enemy misses
@@ -477,7 +534,7 @@ animate();
 
 window.addEventListener('keydown', (event) => {
     //player keys
-    if(!player.dead && !playerTwo.dead)
+    if(!player.dead)
     {
     switch (event.key) {
         //player keys
@@ -495,6 +552,12 @@ window.addEventListener('keydown', (event) => {
         case 's':
             player.attack();
             break;
+    }
+}
+
+if(!playerTwo.dead)
+    {
+    switch (event.key) {
         //player two keys
         case 'h':
             keys.h.pressed = true;
@@ -513,7 +576,9 @@ window.addEventListener('keydown', (event) => {
     }
 }
 
-if(!enemy.dead && !enemyTwo.dead){
+
+
+if(!enemy.dead){
     switch(event.key){
         //enemy keys
         case 'ArrowRight':
@@ -530,6 +595,11 @@ if(!enemy.dead && !enemyTwo.dead){
        case 'ArrowDown':
            enemy.attack();
            break;
+   }
+}
+
+if(!enemyTwo.dead){
+    switch(event.key){
         //enemy two keys
         case 'l':
            keys.l.pressed = true;
@@ -558,6 +628,7 @@ window.addEventListener('keyup', (event) => {
         case 'a':
             keys.a.pressed = false;
             break;
+            //player two keys
         case 'f':
             keys.f.pressed = false;
             break;
@@ -572,6 +643,7 @@ window.addEventListener('keyup', (event) => {
         case 'ArrowLeft':
             keys.ArrowLeft.pressed = false;
             break;
+            //enemy two keys
         case 'l':
             keys.l.pressed = false;
             break;
