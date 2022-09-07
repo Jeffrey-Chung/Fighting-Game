@@ -149,7 +149,7 @@ const playerTwo = new Fighter({
 
 const enemy = new Fighter({
     position: {
-        x: 400,
+        x: 950,
         y: 100
     },
     velocity: {
@@ -210,7 +210,7 @@ const enemy = new Fighter({
 
 const enemyTwo = new Fighter({
     position: {
-        x: 600,
+        x: 950,
         y: 100
     },
     velocity: {
