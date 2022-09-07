@@ -138,11 +138,11 @@ const playerTwo = new Fighter({
     },
     attackBox: {
         offset: {
-            x: 50,
-            y: 25
+            x: 100,
+            y: 50
         },
-        width: 80,
-        height: 40
+        width: 160,
+        height: 50
     }
 });
 
@@ -406,9 +406,26 @@ function animate() {
         })
     }
 
+    //detect where enemy gets hit
+    if (rectangularCollision({
+        rectangle1: playerTwo,
+        rectangle2: enemy
+    }) &&
+    playerTwo.isAttacking && playerTwo.framesCurrent == 4) {
+    enemy.takeHit();
+    playerTwo.isAttacking = false;
+    //document.querySelector('#playerHealth').style.width = player.health + '%'
+    gsap.to('#enemyHealth', {
+        width: enemy.health + 10 + '%'
+    })
+}
+
     //if player misses
     if (player.isAttacking && player.framesCurrent == 4) {
         player.isAttacking = false;
+    }
+    if (playerTwo.isAttacking && playerTwo.framesCurrent == 4) {
+        playerTwo.isAttacking = false;
     }
 
     //detect where player gets hit
@@ -425,9 +442,25 @@ function animate() {
         })
     }
 
+    if (rectangularCollision({
+        rectangle1: enemyTwo,
+        rectangle2: player
+    }) &&
+    enemyTwo.isAttacking && enemyTwo.framesCurrent == 2) {
+    player.takeHit();
+    enemyTwo.isAttacking = false;
+    //document.querySelector('#playerHealth').style.width = player.health + '%'
+    gsap.to('#playerHealth', {
+        width: player.health + 10 + '%'
+    })
+}
+
     //if enemy misses
     if (enemy.isAttacking && enemy.framesCurrent == 2) {
         enemy.isAttacking = false;
+    }
+    if (enemyTwo.isAttacking && enemyTwo.framesCurrent == 2) {
+        enemyTwo.isAttacking = false;
     }
 
     //end game based on health
