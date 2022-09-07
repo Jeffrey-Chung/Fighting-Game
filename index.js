@@ -78,10 +78,10 @@ const player = new Fighter({
     },
     attackBox: {
         offset: {
-            x: 100,
+            x: 70,
             y: 50
         },
-        width: 160,
+        width: 170,
         height: 50
     }
 });
@@ -138,10 +138,10 @@ const playerTwo = new Fighter({
     },
     attackBox: {
         offset: {
-            x: -100,
-            y: 50
+            x: -50,
+            y: 75
         },
-        width: 160,
+        width: 170,
         height: 50
     }
 });
@@ -149,8 +149,8 @@ const playerTwo = new Fighter({
 
 const enemy = new Fighter({
     position: {
-        x: 950,
-        y: 100
+        x: 790,
+        y: 0
     },
     velocity: {
         x: 0,
@@ -210,8 +210,8 @@ const enemy = new Fighter({
 
 const enemyTwo = new Fighter({
     position: {
-        x: 950,
-        y: 100
+        x: 700,
+        y: 0
     },
     velocity: {
         x: 0,
@@ -261,8 +261,8 @@ const enemyTwo = new Fighter({
     },
     attackBox: {
         offset: {
-            x: -170,
-            y: 50
+            x: -275,
+            y: 75
         },
         width: 170,
         height: 50
