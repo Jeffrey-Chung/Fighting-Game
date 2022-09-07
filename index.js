@@ -409,14 +409,14 @@ function animate() {
     //detect where enemy gets hit
     if (rectangularCollision({
         rectangle1: playerTwo,
-        rectangle2: enemy
+        rectangle2: enemyTwo
     }) &&
     playerTwo.isAttacking && playerTwo.framesCurrent == 4) {
-    enemy.takeHit();
+    enemyTwo.takeHit();
     playerTwo.isAttacking = false;
-    //document.querySelector('#playerHealth').style.width = player.health + '%'
-    gsap.to('#enemyHealth', {
-        width: enemy.health + 10 + '%'
+    //document.querySelector('#enemyTwoHealth').style.width = enemyTwo.health + '%'
+    gsap.to('#enemyTwoHealth', {
+        width: enemyTwo.health + '%'
     })
 }
 
@@ -444,14 +444,14 @@ function animate() {
 
     if (rectangularCollision({
         rectangle1: enemyTwo,
-        rectangle2: player
+        rectangle2: playerTwo
     }) &&
     enemyTwo.isAttacking && enemyTwo.framesCurrent == 2) {
-    player.takeHit();
+    playerTwo.takeHit();
     enemyTwo.isAttacking = false;
     //document.querySelector('#playerHealth').style.width = player.health + '%'
-    gsap.to('#playerHealth', {
-        width: player.health + 10 + '%'
+    gsap.to('#playerTwoHealth', {
+        width: playerTwo.health + 10 + '%'
     })
 }
 
@@ -464,7 +464,7 @@ function animate() {
     }
 
     //end game based on health
-    if (enemy.health <= 0 || player.health <= 0) {
+    if ((enemy.health <= 0 && enemyTwo.health<=0)|| (player.health <= 0 && playerTwo.health<=0)) {
         determineWinner({
             player,
             enemy,
