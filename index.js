@@ -86,6 +86,67 @@ const player = new Fighter({
     }
 });
 
+const playerTwo = new Fighter({
+    position: {
+        x: 250,
+        y: 0
+    },
+    velocity: {
+        x: 0,
+        y: 0
+    },
+    offset: {
+        x: 0,
+        y: 0
+    },
+    imageSrc: './image/samuraiMack/Idle.png',
+    framesMax: 8,
+    scale: 1.25,
+    offset: {
+        x: 215,
+        y: 10
+    },
+    sprites: {
+        idle: {
+            imageSrc: './image/samuraiMack/Idle.png',
+            framesMax: 8
+        },
+        run: {
+            imageSrc: './image/samuraiMack/Run.png',
+            framesMax: 8
+        },
+        jump: {
+            imageSrc: './image/samuraiMack/Jump.png',
+            framesMax: 2
+        },
+        fall: {
+            imageSrc: './image/samuraiMack/Fall.png',
+            framesMax: 2
+        },
+        attack1: {
+            imageSrc: './image/samuraiMack/Attack1.png',
+            framesMax: 6
+        },
+        takeHit: {
+            imageSrc: './image/samuraiMack/Take Hit - white silhouette.png',
+            framesMax: 4
+        }, 
+        death: {
+            imageSrc: './image/samuraiMack/Death.png',
+            framesMax: 6
+        }
+    },
+    attackBox: {
+        offset: {
+            x: 50,
+            y: 25
+        },
+        width: 80,
+        height: 40
+    }
+});
+
+
 const enemy = new Fighter({
     position: {
         x: 400,
@@ -106,6 +167,67 @@ const enemy = new Fighter({
     offset: {
         x: 215,
         y: 167
+    },
+    sprites: {
+        idle: {
+            imageSrc: './image/kenji/Idle.png',
+            framesMax: 4
+        },
+        run: {
+            imageSrc: './image/kenji/Run.png',
+            framesMax: 8
+        },
+        jump: {
+            imageSrc: './image/kenji/Jump.png',
+            framesMax: 2
+        },
+        fall: {
+            imageSrc: './image/kenji/Fall.png',
+            framesMax: 2
+        },
+        attack1: {
+            imageSrc: './image/kenji/Attack1.png',
+            framesMax: 4
+        },
+        takeHit: {
+            imageSrc: './image/kenji/Take hit.png',
+            framesMax: 3
+        },
+        death: {
+            imageSrc: './image/kenji/Death.png',
+            framesMax: 7
+        }
+    },
+    attackBox: {
+        offset: {
+            x: -170,
+            y: 50
+        },
+        width: 170,
+        height: 50
+    }
+});
+
+const enemyTwo = new Fighter({
+    position: {
+        x: 600,
+        y: 100
+    },
+    velocity: {
+        x: 0,
+        y: 0
+    },
+    color: 'blue',
+    offset: {
+        x: -50,
+        y: 0
+    },
+    imageSrc: './image/kenji/Idle.png',
+    framesMax: 4,
+    scale: 1.25,
+    offset: {
+        x: 215,
+        y: 10
     },
     sprites: {
         idle: {
@@ -175,10 +297,14 @@ function animate() {
     c.fillStyle = 'rgba(255, 255, 255, 0.15)';
     c.fillRect(0, 0, canvas.width, canvas.height);
     player.update();
+    playerTwo.update();
     enemy.update();
+    enemyTwo.update();
 
     player.velocity.x = 0;
+    playerTwo.velocity.x = 0;
     enemy.velocity.x = 0;
+    enemyTwo.velocity.x=0;
 
     //player movement
 
