@@ -278,6 +278,18 @@ const keys = {
     d: {
         pressed: false
     },
+    f: {
+        pressed: false
+    },
+    h: {
+        pressed: false
+    },
+    j: {
+        pressed: false
+    },
+    l: {
+        pressed: false
+    },
     ArrowRight: {
         pressed: false
     },
@@ -318,6 +330,17 @@ function animate() {
         player.switchSprite('idle');
     }
 
+    //player Two movement
+    if (keys.f.pressed && playerTwo.lastKey == 'f') {
+        playerTwo.velocity.x = -5;
+        playerTwo.switchSprite('run');
+    } else if (keys.h.pressed && playerTwo.lastKey == 'h') {
+        playerTwo.velocity.x = 5;
+        playerTwo.switchSprite('run');
+    } else {
+        playerTwo.switchSprite('idle');
+    }
+
     //enemy movement
     if (keys.ArrowLeft.pressed && enemy.lastKey == 'ArrowLeft') {
         enemy.velocity.x = -5;
@@ -329,6 +352,17 @@ function animate() {
         enemy.switchSprite('idle');
     }
 
+    //enemy two movement
+    if (keys.j.pressed && enemyTwo.lastKey == 'j') {
+        enemyTwo.velocity.x = -5;
+        enemyTwo.switchSprite('run');
+    } else if (keys.l.pressed && enemyTwo.lastKey == 'l') {
+        enemyTwo.velocity.x = 5;
+        enemyTwo.switchSprite('run');
+    } else {
+        enemyTwo.switchSprite('idle');
+    }
+
     //player jumping
     if (player.velocity.y < 0) {
         player.switchSprite('jump');
@@ -336,11 +370,25 @@ function animate() {
         player.switchSprite('fall');
     }
 
+    //player two jumping
+    if (playerTwo.velocity.y < 0) {
+        playerTwo.switchSprite('jump');
+    } else if (playerTwo.velocity.y > 0) {
+        playerTwo.switchSprite('fall');
+    }
+
     //enemy jumping
     if (enemy.velocity.y < 0) {
         enemy.switchSprite('jump');
     } else if (enemy.velocity.y > 0) {
         enemy.switchSprite('fall');
+    }
+
+     //enemy two jumping
+     if (enemyTwo.velocity.y < 0) {
+        enemyTwo.switchSprite('jump');
+    } else if (enemyTwo.velocity.y > 0) {
+        enemyTwo.switchSprite('fall');
     }
 
     //detect where enemy gets hit
@@ -395,9 +443,11 @@ function animate() {
 animate();
 
 window.addEventListener('keydown', (event) => {
-    if(!player.dead)
+    //player keys
+    if(!player.dead && !playerTwo.dead)
     {
     switch (event.key) {
+        //player keys
         case 'd':
             keys.d.pressed = true;
             player.lastKey = 'd';
@@ -409,13 +459,28 @@ window.addEventListener('keydown', (event) => {
         case 'w':
             player.velocity.y = -20;
             break;
-        case ' ':
+        case 's':
             player.attack();
+            break;
+        //player two keys
+        case 'h':
+            keys.h.pressed = true;
+            playerTwo.lastKey = 'h';
+            break;
+        case 'f':
+            keys.f.pressed = true;
+            playerTwo.lastKey = 'f';
+            break;
+        case 't':
+            playerTwo.velocity.y = -20;
+            break;
+        case 'g':
+            playerTwo.attack();
             break;
     }
 }
 
-if(!enemy.dead){
+if(!enemy.dead && !enemyTwo.dead){
     switch(event.key){
         //enemy keys
         case 'ArrowRight':
@@ -432,19 +497,40 @@ if(!enemy.dead){
        case 'ArrowDown':
            enemy.attack();
            break;
+        //enemy two keys
+        case 'l':
+           keys.l.pressed = true;
+           enemyTwo.lastKey = 'l';
+           break;
+        case 'j':
+           keys.j.pressed = true;
+           enemyTwo.lastKey = 'j';
+           break;
+        case 'i':
+           enemyTwo.velocity.y = -20;
+           break;
+        case 'k':
+           enemyTwo.attack();
+           break;
    }
 }
 })
 
 window.addEventListener('keyup', (event) => {
     switch (event.key) {
+        //player keys
         case 'd':
             keys.d.pressed = false;
             break;
         case 'a':
             keys.a.pressed = false;
             break;
-
+        case 'f':
+            keys.f.pressed = false;
+            break;
+        case 'h':
+            keys.h.pressed = false;
+            break;
 
             //enemy keys
         case 'ArrowRight':
@@ -452,6 +538,12 @@ window.addEventListener('keyup', (event) => {
             break;
         case 'ArrowLeft':
             keys.ArrowLeft.pressed = false;
+            break;
+        case 'l':
+            keys.l.pressed = false;
+            break;
+        case 'j':
+            keys.j.pressed = false;
             break;
     }
 })
